@@ -22,26 +22,56 @@ public class dublicateZeros {
     public static void main(String[] args) {
 
         int[] arr = {1, 0, 2, 3, 0, 4, 5, 0};
-        System.out.println(Arrays.toString(duplicate(arr)));
+        duplicate(arr);
     }
 
-    public static int[] duplicate(int[] arr) {
+//    public static int[] duplicate(int[] arr) {
+//
+//        int[] temp = new int[arr.length];
+//        int length = 0;
+//        for (int i = 0; i < arr.length && length<arr.length; i++) {
+//            if (arr[i] == 0) {
+//                temp[length] = 0;
+//                length++;
+//                temp[length] = arr[i];
+//                length++;
+//            } else {
+//                temp[length] = arr[i];
+//                length++;
+//            }
+//
+//        }
+//        return temp;
+//    }
 
-        int[] temp = new int[arr.length];
-        int length = 0;
-        for (int i = 0; i < arr.length && length<arr.length; i++) {
-            if (arr[i] == 0) {
-                temp[length] = 0;
-                length++;
-                temp[length] = arr[i];
-                length++;
-            } else {
-                temp[length] = arr[i];
-                length++;
+
+        public static void duplicate(int[] arr) {
+            int zeros = 0;
+            int n = arr.length;
+
+            // 1️⃣ Count zeros
+            for (int i = 0; i < n; i++) {
+                if (arr[i] == 0) zeros++;
             }
 
-        }
-        return temp;
+            // 2️⃣ Traverse from end
+            for (int i = n - 1; i >= 0; i--) {
+
+                // shift element if inside bounds
+                if (i + zeros < n) {
+                    arr[i + zeros] = arr[i];
+                }
+
+                // if zero → duplicate
+                if (arr[i] == 0) {
+                    zeros--;
+                    if (i + zeros < n) {
+                        arr[i + zeros] = 0;
+                    }
+                }
+            }
+
     }
+
 
 }
